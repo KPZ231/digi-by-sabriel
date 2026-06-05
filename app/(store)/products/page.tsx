@@ -1,21 +1,27 @@
-import ProductGrid from "@/components/product/ProductGrid";
-import { getProducts } from "@/lib/woocommerce/products";
+import type { Metadata } from "next";
+import ProductsHero from "@/components/products/ProductsHero";
+import ProductsView from "@/components/products/ProductsView";
+import { getProducts, getCategories } from "@/lib/woocommerce/products";
 
-export const metadata = {
-  title: "Wszystkie produkty — Digi by Sabriel",
-  description: "Przeglądaj nasze cyfrowe grafiki scrapbookingowe.",
+export const metadata: Metadata = {
+  title: "Wszystkie grafiki — Digi by Sabriel",
+  description:
+    "Ponad 300 unikalnych grafik cyfrowych do scrapbookingu. Urodziny, ślub, Baby Shower i więcej. Pobierz natychmiast po zakupie.",
 };
 
 export default async function ProductsPage() {
-  const result = await getProducts({ first: 50 });
-  const products = result.data ?? [];
+  const [productsResult, categoriesResult] = await Promise.all([
+    getProducts({ first: 100 }),
+    getCategories(),
+  ]);
+
+  const products = productsResult.data ?? [];
+  const categories = categoriesResult.data ?? [];
 
   return (
-    <main className="w-full px-4 md:px-8 py-12 md:py-20">
-      <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-10">
-        Wszystkie produkty
-      </h1>
-      <ProductGrid products={products} />
+    <main>
+      <ProductsHero categories={categories} />
+      <ProductsView products={products} categories={categories} />
     </main>
   );
 }

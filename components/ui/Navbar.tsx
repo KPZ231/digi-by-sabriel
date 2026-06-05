@@ -5,11 +5,11 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { FaHeart, FaBasketShopping, FaBars, FaXmark } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
+import { useCartStore } from "@/stores/cart.store";
 
 const NAV_LINKS = [
   { name: "Sklep", href: "/products" },
-  { name: "Kategorie", href: "/category" },
-  { name: "Bestsellery", href: "/products?sort=bestsellers" },
+  { name: "Jak używać grafik?" , href: "/jak-uzywac-grafik"},
   { name: "O nas", href: "/o-mnie" },
 ] as const;
 
@@ -19,6 +19,7 @@ export default function Navbar() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const cartCount = useCartStore((s) => s.itemCount());
 
   const handleSearch = useCallback(
     (e: React.SyntheticEvent<HTMLFormElement>) => {
@@ -107,15 +108,17 @@ export default function Navbar() {
           <Link
             href="/cart"
             className="relative p-2 rounded-full hover:bg-slate-100 transition-colors"
-            aria-label="Koszyk, 2 produkty"
+            aria-label={`Koszyk${cartCount > 0 ? `, ${cartCount} ${cartCount === 1 ? 'produkt' : cartCount < 5 ? 'produkty' : 'produktów'}` : ''}`}
           >
             <FaBasketShopping className="text-slate-700 text-lg" />
-            <span
-              className="absolute top-0 right-0 size-4 bg-primary text-white text-[10px] font-bold flex items-center justify-center rounded-full"
-              aria-hidden="true"
-            >
-              2
-            </span>
+            {cartCount > 0 && (
+              <span
+                className="absolute top-0 right-0 min-w-[1rem] h-4 px-0.5 bg-primary text-white text-[10px] font-bold flex items-center justify-center rounded-full"
+                aria-hidden="true"
+              >
+                {cartCount > 99 ? '99+' : cartCount}
+              </span>
+            )}
           </Link>
 
           {/* Hamburger */}

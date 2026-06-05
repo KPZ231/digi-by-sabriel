@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import { getProductBySlug, getProducts } from "@/lib/woocommerce/products";
 import { sanitize } from "@/lib/utils/sanitize";
+import AddToCartButton from "@/components/product/AddToCartButton";
 import type { Metadata } from "next";
+import Image from "next/image";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -37,7 +39,7 @@ export default async function ProductPage({ params }: Props) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div className="aspect-square bg-slate-100 rounded-2xl overflow-hidden">
           {product.image ? (
-            <img
+            <Image
               src={product.image.sourceUrl}
               alt={product.image.altText || product.name}
               className="w-full h-full object-cover"
@@ -65,12 +67,7 @@ export default async function ProductPage({ params }: Props) {
             />
           )}
 
-          <button
-            className="mt-4 flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold px-6 py-3 rounded-full transition-all hover:scale-105 active:scale-95 shadow-sm shadow-primary/20"
-            aria-label={`Dodaj ${product.name} do koszyka`}
-          >
-            Dodaj do koszyka
-          </button>
+          <AddToCartButton product={product} />
         </div>
       </div>
 

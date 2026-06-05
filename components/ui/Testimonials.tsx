@@ -141,7 +141,7 @@ export default function Testimonials() {
 
               {/* Quote */}
               <blockquote className="text-[#564335] text-sm leading-relaxed flex-1">
-                "{t.text}"
+               `&quot;` {t.text}`&quot;`
               </blockquote>
 
               {/* Author */}

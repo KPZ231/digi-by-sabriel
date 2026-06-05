@@ -7,7 +7,7 @@ import {
   GET_FEATURED_PRODUCTS,
 } from '@/lib/graphql/queries/products'
 import { GET_CATEGORIES } from '@/lib/graphql/queries/categories'
-import type { WooProduct, WooCategory, Result } from '@/types/product.types'
+import type { WooProduct, WooCategory, Result, AppError } from '@/types/product.types'
 
 type ProductsResponse = {
   products: { nodes: WooProduct[] }
@@ -21,7 +21,7 @@ type CategoriesResponse = {
   productCategories: { nodes: WooCategory[] }
 }
 
-function toAppError(err: unknown): Result<never>['error'] {
+function toAppError(err: unknown): AppError {
   if (err instanceof ClientError) {
     const isNotFound = err.response.errors?.some((e) =>
       e.message?.toLowerCase().includes('not found')

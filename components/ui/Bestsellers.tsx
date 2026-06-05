@@ -32,8 +32,9 @@ export default function Bestsellers({ products }: Props) {
     <section
       ref={ref}
       aria-labelledby="bestsellers-heading"
-      className="w-full px-4 md:px-8 py-12 md:py-20"
+      className="w-full py-12 md:py-20"
     >
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
       <motion.div
         className="text-center mb-10"
         initial="hidden"
@@ -86,6 +87,7 @@ export default function Bestsellers({ products }: Props) {
           Zobacz wszystkie produkty
         </Link>
       </motion.div>
+      </div>
     </section>
   );
 }

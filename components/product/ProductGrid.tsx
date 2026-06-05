@@ -5,8 +5,6 @@ import { motion, useInView } from "framer-motion";
 import ProductCard from "./ProductCard";
 import type { WooProduct } from "@/types/product.types";
 
-const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
-
 const containerVariants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },

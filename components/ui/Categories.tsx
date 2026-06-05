@@ -32,8 +32,9 @@ export default function Categories({ categories }: Props) {
     <section
       ref={ref}
       aria-labelledby="categories-heading"
-      className="w-full px-4 md:px-8 py-12 md:py-20"
+      className="w-full py-12 md:py-20"
     >
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
       <motion.div
         className="flex items-end justify-between mb-8 px-1"
         initial="hidden"
@@ -49,7 +50,7 @@ export default function Categories({ categories }: Props) {
           </motion.span>
           <motion.h2
             id="categories-heading"
-            className="text-5xl font-bold text-slate-900 mb-1 font-[family-name:var(--font-family-display)] italic"
+            className="text-5xl font-bold text-slate-900 mb-1 font-(family-name:--font-family-display) italic"
             variants={headingVariants}
           >
             Odkryj kategorie
@@ -107,9 +108,9 @@ export default function Categories({ categories }: Props) {
                 )}
               </div>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-[#944a00]/10 to-transparent flex flex-col justify-end p-5">
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-[#944a00]/10 to-transparent flex flex-col justify-end p-5">
                 <motion.span
-                  className="block text-white font-bold text-xl leading-tight font-[family-name:var(--font-family-display)]"
+                  className="block text-white font-bold text-xl leading-tight font-(family-name:--font-family-display)"
                   initial={false}
                   whileHover={{ x: 3 }}
                   transition={{ duration: 0.2 }}
@@ -139,6 +140,7 @@ export default function Categories({ categories }: Props) {
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>
         </Link>
+      </div>
       </div>
     </section>
   );

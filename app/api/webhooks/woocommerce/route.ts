@@ -39,8 +39,8 @@ export async function POST(request: NextRequest) {
     return new Response('Invalid JSON', { status: 400 })
   }
 
-  revalidateTag('products')
-  revalidateTag('categories')
+  revalidateTag('products', 'default')
+  revalidateTag('categories', 'default')
 
   if (slug) {
     console.info(`[webhook] Revalidated products tag (slug: ${slug})`)

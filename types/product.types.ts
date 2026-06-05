@@ -16,6 +16,8 @@ export type WooProduct = {
   productCategories: { nodes: Array<{ id: string; name: string; slug: string }> }
   downloadable: boolean
   virtual: boolean
+  averageRating?: number
+  reviewCount?: number
 }
 
 export type WooCategory = {

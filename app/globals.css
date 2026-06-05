@@ -221,6 +221,66 @@
   animation: gradient-shift 6s ease infinite;
 }
 
+@keyframes progress-fill {
+  0% { width: 0%; opacity: 1; }
+  55% { width: 85%; opacity: 1; }
+  75% { width: 100%; opacity: 1; }
+  88% { width: 100%; opacity: 0; }
+  89%, 100% { width: 0%; opacity: 0; }
+}
+
+@keyframes file-drop {
+  0%, 15% { opacity: 0; transform: translateY(-14px); }
+  35%, 75% { opacity: 1; transform: translateY(0); }
+  90%, 100% { opacity: 0; transform: translateY(-14px); }
+}
+
+@keyframes check-appear {
+  0%, 40% { opacity: 0; transform: scale(0) rotate(-10deg); }
+  60%, 85% { opacity: 1; transform: scale(1) rotate(0deg); }
+  95%, 100% { opacity: 0; transform: scale(0) rotate(10deg); }
+}
+
+@keyframes row-highlight {
+  0%, 15%, 75%, 100% { background-color: transparent; }
+  30%, 60% { background-color: rgba(148, 74, 0, 0.1); border-color: rgba(148, 74, 0, 0.2); }
+}
+
+@keyframes cursor-click {
+  0%, 60%, 100% { transform: scale(1); opacity: 1; }
+  70% { transform: scale(0.88); opacity: 0.8; }
+}
+
+@keyframes lock-open {
+  0%, 30% { transform: rotate(0deg) translateY(0); }
+  50%, 80% { transform: rotate(-28deg) translateY(-3px); }
+  100% { transform: rotate(0deg) translateY(0); }
+}
+
+.animate-progress-fill {
+  animation: progress-fill 2.5s ease-in-out infinite;
+}
+
+.animate-file-drop {
+  animation: file-drop 3s ease-in-out infinite;
+}
+
+.animate-check-appear {
+  animation: check-appear 3s ease-in-out infinite;
+}
+
+.animate-row-highlight {
+  animation: row-highlight 3s ease-in-out infinite;
+}
+
+.animate-cursor-click {
+  animation: cursor-click 2.5s ease-in-out infinite;
+}
+
+.animate-lock-open {
+  animation: lock-open 3s ease-in-out infinite;
+}
+
 .grain-overlay::after {
   content: '';
   position: fixed;
