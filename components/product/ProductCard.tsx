@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import type { WooProduct } from "@/types/product.types";
 import { useCartStore } from "@/stores/cart.store";
+import { useWishlistStore } from "@/stores/wishlist.store";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -31,12 +32,13 @@ const cardVariants = {
   },
 };
 
-function HeartButton({ productName }: { productName: string }) {
-  const [liked, setLiked] = useState(false);
+function HeartButton({ product }: { product: WooProduct }) {
+  const toggleItem = useWishlistStore((s) => s.toggleItem);
+  const liked = useWishlistStore((s) => s.hasItem(product.databaseId));
   return (
     <button
-      onClick={(e) => { e.preventDefault(); setLiked((v) => !v); }}
-      aria-label={liked ? `Usuń ${productName} z ulubionych` : `Dodaj ${productName} do ulubionych`}
+      onClick={(e) => { e.preventDefault(); toggleItem(product); }}
+      aria-label={liked ? `Usuń ${product.name} z ulubionych` : `Dodaj ${product.name} do ulubionych`}
       aria-pressed={liked}
       className="w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm shadow-sm flex items-center justify-center transition-transform hover:scale-110 active:scale-95"
     >
@@ -105,7 +107,7 @@ export default function ProductCard({ product, animate = true, featured = false 
         )}
 
         <div className="absolute top-3 right-3 z-10">
-          <HeartButton productName={product.name} />
+          <HeartButton product={product} />
         </div>
 
         {category && (

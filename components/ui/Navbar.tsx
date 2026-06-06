@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { FaHeart, FaBasketShopping, FaBars, FaXmark } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { useCartStore } from "@/stores/cart.store";
+import { useWishlistStore } from "@/stores/wishlist.store";
 
 const NAV_LINKS = [
   { name: "Sklep", href: "/products" },
@@ -20,6 +21,7 @@ export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
   const cartCount = useCartStore((s) => s.itemCount());
+  const wishlistCount = useWishlistStore((s) => s.itemCount());
 
   const handleSearch = useCallback(
     (e: React.SyntheticEvent<HTMLFormElement>) => {
@@ -98,10 +100,18 @@ export default function Navbar() {
           {/* Favorites */}
           <Link
             href="/favorites"
-            className="p-2 rounded-full hover:bg-slate-100 transition-colors"
-            aria-label="Ulubione"
+            className="relative p-2 rounded-full hover:bg-slate-100 transition-colors"
+            aria-label={`Ulubione${wishlistCount > 0 ? `, ${wishlistCount} ${wishlistCount === 1 ? 'produkt' : wishlistCount < 5 ? 'produkty' : 'produktów'}` : ''}`}
           >
-            <FaHeart className="text-slate-700 text-lg" />
+            <FaHeart className={`text-lg transition-colors ${wishlistCount > 0 ? 'text-rose-500' : 'text-slate-700'}`} />
+            {wishlistCount > 0 && (
+              <span
+                className="absolute top-0 right-0 min-w-[1rem] h-4 px-0.5 bg-rose-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full"
+                aria-hidden="true"
+              >
+                {wishlistCount > 99 ? '99+' : wishlistCount}
+              </span>
+            )}
           </Link>
 
           {/* Cart */}
