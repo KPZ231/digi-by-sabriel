@@ -22,8 +22,8 @@ const ACCOUNT_LINKS = [
 const LEGAL_LINKS = [
   { name: "Polityka prywatności", href: "/polityka-prywatnosci" },
   { name: "Regulamin", href: "/regulamin" },
-  { name: "Polityka cookies", href: "/cookies" },
-  { name: "Zwroty i reklamacje", href: "/zwroty" },
+  { name: "Polityka cookies", href: "/polityka-cookies" },
+  { name: "Zwroty i reklamacje", href: "/zwroty-reklamacje" },
 ];
 
 const SOCIAL = [
